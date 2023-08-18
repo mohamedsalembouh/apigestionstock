@@ -1,17 +1,14 @@
 package com.salem.gestionstock.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
+@Getter
+@Setter
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -22,7 +19,8 @@ public class Client extends abstractEntity{
     private String nom;
     @Column
     private String prenom;
-//    private String adress;
+    @Embedded
+    private Adresse adress;
     @Column
     private String photo;
     @Column

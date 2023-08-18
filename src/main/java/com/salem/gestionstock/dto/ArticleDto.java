@@ -1,0 +1,54 @@
+package com.salem.gestionstock.dto;
+
+import com.salem.gestionstock.model.Article;
+import com.salem.gestionstock.model.Category;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Builder;
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Builder
+@Data
+public class ArticleDto {
+    private int id;
+    private String codeArticle;
+    private String designation;
+    private BigDecimal prixUnitaireHt;
+    private BigDecimal tauxtva;
+    private BigDecimal prixUnitaireTtc;
+    private String photo;
+
+    private CategoryDto category;
+
+    public ArticleDto fromEntity(Article article){
+        if(article == null){
+            return null;
+        }
+        return  ArticleDto.builder()
+                .id(article.getId())
+                .codeArticle(article.getCodeArticle())
+                .designation(article.getCodeArticle())
+                .prixUnitaireHt(article.getPrixUnitaireHt())
+                .tauxtva(article.getTauxtva())
+                .prixUnitaireTtc(article.getPrixUnitaireTtc())
+                .photo(article.getPhoto())
+                .build();
+    }
+    public Article toEntity(ArticleDto articleDto){
+        if(articleDto == null){
+            return null;
+        }
+        Article article = new Article();
+        article.setId(articleDto.getId());
+        article.setCodeArticle(articleDto.getCodeArticle());
+        article.setDesignation(articleDto.getDesignation());
+        article.setPrixUnitaireHt(articleDto.getPrixUnitaireHt());
+        article.setTauxtva(articleDto.getTauxtva());
+        article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
+        article.setPhoto(articleDto.getPhoto());
+        return article;
+    }
+}
