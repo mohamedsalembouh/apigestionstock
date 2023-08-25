@@ -26,7 +26,7 @@ public class EntrepriseDto {
 
     private List<UtilisateurDto> utilisateurs;
 
-    public EntrepriseDto fromEntity(Entreprise entreprise){
+    public static EntrepriseDto fromEntity(Entreprise entreprise){
         if(entreprise == null){
             return null;
         }
@@ -43,7 +43,7 @@ public class EntrepriseDto {
                 .build();
     }
 
-    public Entreprise toEntity(EntrepriseDto entrepriseDto){
+    public static Entreprise toEntity(EntrepriseDto entrepriseDto){
         if(entrepriseDto == null){
             return null;
         }
@@ -54,7 +54,7 @@ public class EntrepriseDto {
         entreprise.setAdresse(entrepriseDto.getAdresse());
         entreprise.setCodeFiscal(entrepriseDto.getCodeFiscal());
         entreprise.setPhoto(entrepriseDto.getPhoto());
-        entreprise.setEmail(entrepriseDto.email);
+        entreprise.setEmail(entrepriseDto.getEmail());
         entreprise.setNumTel(entrepriseDto.getNumTel());
         entreprise.setSteweb(entrepriseDto.getSteweb());
         return entreprise;

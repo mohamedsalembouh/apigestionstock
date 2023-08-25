@@ -18,9 +18,13 @@ public class LigneVente extends abstractEntity{
     @ManyToOne
     @JoinColumn(name = "idvente")
     private Ventes vente;
-
+    @ManyToOne
+    @JoinColumn(name = "idarticle")
+    private Article article;
     @Column(name = "quantite")
     private BigDecimal quantite;
     @Column(name = "prixunitaire")
     private BigDecimal prixunitaire;
+    @Column(name = "identreprise")
+    private int identreprise;
 }

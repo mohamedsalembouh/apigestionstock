@@ -24,4 +24,6 @@ public class MvtStk extends abstractEntity{
     private Article article;
     @Column(name = "typemvt")
     private TypeMvtStk typeMvt;
+    @Column(name = "identreprise")
+    private int identreprise;
 }

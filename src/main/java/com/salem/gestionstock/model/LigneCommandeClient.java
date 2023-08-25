@@ -24,4 +24,6 @@ public class LigneCommandeClient extends abstractEntity{
     private BigDecimal quantite;
     @Column(name = "prixunitaire")
     private BigDecimal prixunitaire;
+    @Column(name = "identreprise")
+    private int identreprise;
 }

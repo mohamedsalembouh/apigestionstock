@@ -2,10 +2,13 @@ package com.salem.gestionstock.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
+
 @Getter
 @Setter
 @Data
@@ -22,4 +25,8 @@ public class Ventes extends abstractEntity{
     private Instant dateVente;
     @Column
     private String commentaire;
+    @Column(name = "identreprise")
+    private int identreprise;
+    @OneToMany(mappedBy = "vente")
+    private List<LigneVente> ligneVentes;
 }

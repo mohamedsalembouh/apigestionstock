@@ -1,5 +1,6 @@
 package com.salem.gestionstock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salem.gestionstock.model.Adresse;
 import com.salem.gestionstock.model.Client;
 import com.salem.gestionstock.model.CommandeClient;
@@ -21,9 +22,13 @@ public class ClientDto {
     private String photo;
     private String mail;
     private String numTel;
+
+    @JsonIgnore
     private List<CommandeClientDto> commandeClient;
 
-    public ClientDto fromEntity(Client client){
+    private Integer identreprise;
+
+    public static ClientDto fromEntity(Client client){
         if(client == null){
             return null;
         }
@@ -35,9 +40,10 @@ public class ClientDto {
                 .photo(client.getPhoto())
                 .mail(client.getMail())
                 .numTel(client.getNumTel())
+                .identreprise(client.getIdentreprise())
                 .build();
     }
-    public Client toEntity(ClientDto clientDto){
+    public static Client toEntity(ClientDto clientDto){
         if(clientDto == null){
             return null;
         }
@@ -49,6 +55,7 @@ public class ClientDto {
         client.setPhoto(clientDto.getPhoto());
         client.setMail(clientDto.getMail());
         client.setNumTel(clientDto.getNumTel());
+        client.setIdentreprise(clientDto.getIdentreprise());
         return client;
     }
 }

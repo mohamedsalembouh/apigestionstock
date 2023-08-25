@@ -1,5 +1,6 @@
 package com.salem.gestionstock.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salem.gestionstock.model.Adresse;
 import com.salem.gestionstock.model.CommandeFournisseur;
 import com.salem.gestionstock.model.Fournisseur;
@@ -21,9 +22,13 @@ public class FournisseurDto {
     private String photo;
     private String mail;
     private String numTel;
+
+    private Integer identreprise;
+
+    @JsonIgnore
     private List<CommandeFournisseurDto> commandeFournisseur;
 
-    public FournisseurDto fromEntity(Fournisseur fournisseur){
+    public static FournisseurDto fromEntity(Fournisseur fournisseur){
         if(fournisseur == null){
             return null;
         }
@@ -35,9 +40,10 @@ public class FournisseurDto {
                 .photo(fournisseur.getPhoto())
                 .mail(fournisseur.getMail())
                 .numTel(fournisseur.getNumTel())
+                .identreprise(fournisseur.getIdentreprise())
                 .build();
     }
-    public Fournisseur toEntity(FournisseurDto fournisseurDto){
+    public static Fournisseur toEntity(FournisseurDto fournisseurDto){
         if(fournisseurDto == null){
             return null;
         }
@@ -49,6 +55,7 @@ public class FournisseurDto {
         fournisseur.setPhoto(fournisseurDto.getPhoto());
         fournisseur.setMail(fournisseurDto.getMail());
         fournisseur.setNumTel(fournisseurDto.getNumTel());
+        fournisseur.setIdentreprise(fournisseurDto.getIdentreprise());
         return fournisseur;
     }
 }

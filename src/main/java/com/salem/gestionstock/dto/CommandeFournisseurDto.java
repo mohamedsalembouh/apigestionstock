@@ -24,14 +24,18 @@ public class CommandeFournisseurDto {
 
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs;
 
-    public CommandeFournisseurDto fromEntity(CommandeFournisseur commandeFournisseur){
+    private Integer identreprise;
+
+    public static CommandeFournisseurDto fromEntity(CommandeFournisseur commandeFournisseur){
         return CommandeFournisseurDto.builder()
                 .id(commandeFournisseur.getId())
                 .code(commandeFournisseur.getCode())
                 .dateComand(commandeFournisseur.getDateComand())
+                .fournisseur(FournisseurDto.fromEntity(commandeFournisseur.getFournisseur()))
+                .identreprise(commandeFournisseur.getIdentreprise())
                 .build();
     }
-    public CommandeFournisseur toEntity(CommandeFournisseurDto commandeFournisseurDto){
+    public static CommandeFournisseur toEntity(CommandeFournisseurDto commandeFournisseurDto){
         if(commandeFournisseurDto == null){
             return null;
         }
@@ -39,6 +43,8 @@ public class CommandeFournisseurDto {
         commandeFournisseur.setId(commandeFournisseurDto.getId());
         commandeFournisseur.setCode(commandeFournisseurDto.getCode());
         commandeFournisseur.setDateComand(commandeFournisseurDto.getDateComand());
+        commandeFournisseur.setFournisseur(FournisseurDto.toEntity(commandeFournisseurDto.getFournisseur()));
+        commandeFournisseur.setIdentreprise(commandeFournisseurDto.getIdentreprise());
         return commandeFournisseur;
     }
 }
