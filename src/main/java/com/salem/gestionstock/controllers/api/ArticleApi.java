@@ -1,6 +1,10 @@
 package com.salem.gestionstock.controllers.api;
 
 import com.salem.gestionstock.dto.ArticleDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +13,14 @@ import java.util.List;
 
 import static com.salem.gestionstock.utils.Constants.Url_Root;
 
+@Api(Url_Root + "/articles")
 public interface ArticleApi {
 
     @RequestMapping(value = Url_Root +"/article/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "enregistrer un article",notes = "cette method permet d'enregistrer ou modifier un article",response = ArticleApi.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "L'article est cree avec success")
+    })
     ArticleDto save(@RequestBody ArticleDto articleDto);
 
     @GetMapping(value = Url_Root +"/article/idArticle",produces = MediaType.APPLICATION_JSON_VALUE)
