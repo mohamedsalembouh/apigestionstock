@@ -30,7 +30,7 @@ public class ArticleDto {
         return  ArticleDto.builder()
                 .id(article.getId())
                 .codeArticle(article.getCodeArticle())
-                .designation(article.getCodeArticle())
+                .designation(article.getDesignation())
                 .prixUnitaireHt(article.getPrixUnitaireHt())
                 .tauxtva(article.getTauxtva())
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())

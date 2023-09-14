@@ -11,27 +11,46 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.salem.gestionstock.utils.Constants.Url_Root;
+import static com.salem.gestionstock.utils.Constants.App_Root;
 
-@Api(Url_Root + "/articles")
+@Api(App_Root + "/articles")
 public interface ArticleApi {
 
-    @RequestMapping(value = Url_Root +"/article/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = App_Root +"/article/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "enregistrer un article",notes = "cette method permet d'enregistrer ou modifier un article",response = ArticleApi.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "L'article est cree avec success")
+            @ApiResponse(code = 200,message = "L'article est cree ou modifiee"),
+            @ApiResponse(code = 400,message = "L'article n'est pas valide")
     })
     ArticleDto save(@RequestBody ArticleDto articleDto);
 
-    @GetMapping(value = Url_Root +"/article/idArticle",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = App_Root +"/article/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "rechercher un article",notes = "cette method permet de chercher un article par son id",response = ArticleApi.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "L'article est trouvee"),
+            @ApiResponse(code = 404,message = "Aucun article n'a ete trouve avec ce id ")
+    })
     ArticleDto findById(@PathVariable("idArticle") Integer id);
 
-    @GetMapping(value = Url_Root + "/article/codeArticle",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = App_Root + "/article/{codeArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "rechercher un article par code",notes = "cette method permet de chercher un article par son code",response = ArticleApi.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "L'article est trouvee"),
+            @ApiResponse(code = 404,message = "Aucun article n'a ete trouve avec ce code ")
+    })
     ArticleDto findByCodeArticle(@PathVariable("codeArticle") String code);
 
-    @GetMapping(value = Url_Root + "/article/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = App_Root + "/article/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "renvoyer la liste des articles",notes = "cette method permet de trouver la liste des articles",responseContainer = "List<ArticleDto>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "la liste des articles"),
+    })
     List<ArticleDto> findAll();
 
-    @DeleteMapping(value = Url_Root + "/article/delete/idArticle")
+    @DeleteMapping(value = App_Root + "/article/delete/{idArticle}")
+    @ApiOperation(value = "supprimer un article",notes = "cette method permet de supprimer un article",response = ArticleApi.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "L'article est supprime"),
+    })
     void delete(@PathVariable("idArticle") Integer id);
 }
